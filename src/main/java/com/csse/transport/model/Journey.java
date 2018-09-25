@@ -10,7 +10,6 @@ public class Journey {
     @GeneratedValue(strategy = GenerationType.AUTO)
     //attributes
    private int jID;
-    private  int route;
     private String busID;
     private Date date_journey;
     private  double originLat;
@@ -34,11 +33,9 @@ public class Journey {
     private List<Passenger> passengers = new ArrayList<>();
 
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "pid", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private Passenger passengers;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "RouteID", nullable = false)
+        private Route route;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "pid", nullable = false)
@@ -64,14 +61,7 @@ public class Journey {
 
     }
 
-    public int getRoute() {
 
-        return route;
-    }
-
-    public void setRoute(int route) {
-        this.route = route;
-    }
 
     public String getBusID() {
         return busID;

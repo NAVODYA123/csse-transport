@@ -1,19 +1,15 @@
 package com.csse.transport.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
 public class BusStop {
-    @Id
-    ///@GeneratedValue(strategy = GenerationType.AUTO)
-    private String BusHaltID;
 
-    private String RouteID;
-    private String TownID;
+    @Id
+    @Column(name="BusHaltID",nullable = false,unique=true,columnDefinition="VARCHAR(12)")
+    private String BusHaltID;
+    private String Town;
     private String BusHaltName;
     private float BusHaltLatitude;
     private float BusHaltLongitude;
@@ -26,20 +22,12 @@ public class BusStop {
         BusHaltID = busHaltID;
     }
 
-    public String getRouteID() {
-        return RouteID;
+    public String getTown() {
+        return Town;
     }
 
-    public void setRouteID(String routeID) {
-        RouteID = routeID;
-    }
-
-    public String getTownID() {
-        return TownID;
-    }
-
-    public void setTownID(String townID) {
-        TownID = townID;
+    public void setTown(String town) {
+        Town = town;
     }
 
     public String getBusHaltName() {

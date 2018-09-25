@@ -9,39 +9,36 @@ import javax.persistence.Id;
 @Entity
 public class Route {
     @Id
-    ///@GeneratedValue(strategy = GenerationType.AUTO)
-    private String RouteID;
-    private String OriginID;
-    private String DestinationID;
+    private int RouteID;
+    private String Origin;
+    private String Destination;
     private float OriginLatitude;
     private float OriginLongitude;
     private float DesLatitude;
     private float DesLongitude;
-    private Integer NumberOfStops;
 
-
-    public String getRouteID() {
+    public int getRouteID() {
         return RouteID;
     }
 
-    public void setRouteID(String routeID) {
+    public void setRouteID(int routeID) {
         RouteID = routeID;
     }
 
-    public String getOriginID() {
-        return OriginID;
+    public String getOrigin() {
+        return Origin;
     }
 
-    public void setOriginID(String originID) {
-        OriginID = originID;
+    public void setOrigin(String origin) {
+        Origin = origin;
     }
 
-    public String getDestinationID() {
-        return DestinationID;
+    public String getDestination() {
+        return Destination;
     }
 
-    public void setDestinationID(String destinationID) {
-        DestinationID = destinationID;
+    public void setDestination(String destination) {
+        Destination = destination;
     }
 
     public float getOriginLatitude() {
@@ -74,13 +71,5 @@ public class Route {
 
     public void setDesLongitude(float desLongitude) {
         DesLongitude = desLongitude;
-    }
-
-    public Integer getNumberOfStops() {
-        return NumberOfStops;
-    }
-
-    public void setNumberOfStops(Integer numberOfStops) {
-        NumberOfStops = numberOfStops;
     }
 }
