@@ -1,10 +1,13 @@
 package com.csse.transport.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.util.*;
 
 
 @Entity
+@Table(name = "passenger")
 public class Passenger {
     @Id
     @Column(name="pid",nullable = false,unique=true,columnDefinition="VARCHAR(12)")
@@ -13,7 +16,7 @@ public class Passenger {
     private String email;
     private String sex;
     private int phoneNo;
-    private Boolean status;
+    private boolean status;
     private String address;
     private String type;
     private double amountAvailable;
@@ -29,8 +32,10 @@ public class Passenger {
 //    public void setJourneys(Set<Journey> journeys) {
 //        this.journeys = journeys;
 //    }
-
-    @ManyToMany(fetch = FetchType.LAZY)
+@OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+)
     private List<Journey> journeys = new ArrayList<>();
 
     public String getPid() {

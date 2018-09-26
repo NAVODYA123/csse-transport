@@ -1,31 +1,32 @@
 package com.csse.transport.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 
-@Embeddable
-public class PassengerJourney implements Serializable{
+@Entity(name = "PassengerJourney")
+@Table(name = "passenger_journey")
+public class PassengerJourney {
 
-    @Column(name = "journey_id")
-    private Long JourneyId;
 
-    public Long getJourneyId() {
-        return JourneyId;
-    }
+    @EmbeddedId
+    private PassengerJourneyId id;
 
-    public void setJourneyId(Long journeyId) {
-        JourneyId = journeyId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("JourneyId")
+    private Journey journey;
 
-    public Long getPassengerId() {
-        return PassengerId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("PassengerId")
+    private Passenger passenger;
 
-    public void setPassengerId(Long passengerId) {
-        PassengerId = passengerId;
-    }
+    @Column
+    private  double originLat;
+    @Column
+    private double originLon;
+    @Column
+    private double destLat;
+    @Column
+    private double destLon;
+    @Column
+    private  double fee;
 
-    @Column(name = "passenger_id")
-    private Long PassengerId;
 }

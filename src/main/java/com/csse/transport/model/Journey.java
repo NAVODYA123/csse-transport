@@ -8,28 +8,16 @@ import java.util.*;
 public class Journey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //attributes
-   private int jID;
+    private int journeyId;
     private String busID;
     private Date date_journey;
-    private  double originLat;
-    private double originLon;
-    private double destLat;
-    private double destLon;
-    private  double fee;
-
-
 
 
     //configuring many to many relationship with passenger
-    @ManyToMany(fetch = FetchType.LAZY,
-    cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "passenger_journey",
-    joinColumns = {@JoinColumn(name="journey_id")},
-    inverseJoinColumns = {@JoinColumn(name="passenger_id")})
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Passenger> passengers = new ArrayList<>();
 
 
@@ -37,31 +25,14 @@ public class Journey {
     @JoinColumn(name = "RouteID", nullable = false)
         private Route route;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "pid", nullable = false)
-////    @OnDelete(action = OnDeleteAction.CASCADE)
-////    @JsonIgnore
-//    private Set<LocalPassenger> f_passengers = new HashSet<>();
 
-
-//    public List<Passenger> getPassengers() {
-//        return passengers;
-//    }
-//
-//    public void setPassengers(List<Passenger> passengers) {
-//        this.passengers = passengers;
-//    }
-
-    public int getjID() {
-        return jID;
+    public int getJourneyId() {
+        return journeyId;
     }
 
-    public void setjID(int jID) {
-        this.jID = jID;
-
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
     }
-
-
 
     public String getBusID() {
         return busID;
@@ -79,43 +50,34 @@ public class Journey {
         this.date_journey = date_journey;
     }
 
-    public double getOriginLat() {
-        return originLat;
+    public List<Passenger> getPassengers() {
+        return passengers;
     }
 
-    public void setOriginLat(double originLat) {
-        this.originLat = originLat;
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
     }
 
-    public double getOriginLon() {
-        return originLon;
+    public Route getRoute() {
+        return route;
     }
 
-    public void setOriginLon(double originLon) {
-        this.originLon = originLon;
-    }
-
-    public double getDestLat() {
-        return destLat;
-    }
-
-    public void setDestLat(double destLat) {
-        this.destLat = destLat;
-    }
-
-    public double getDestLon() {
-        return destLon;
-    }
-
-    public void setDestLon(double destLon) {
-        this.destLon = destLon;
-    }
-
-    public double getFee() {
-        return fee;
-    }
-
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "pid", nullable = false)
+////    @OnDelete(action = OnDeleteAction.CASCADE)
+////    @JsonIgnore
+//    private Set<LocalPassenger> f_passengers = new HashSet<>();
+
+
+//    public List<Passenger> getPassengers() {
+//        return passengers;
+//    }
+//
+//    public void setPassengers(List<Passenger> passengers) {
+//        this.passengers = passengers;
+//    }
