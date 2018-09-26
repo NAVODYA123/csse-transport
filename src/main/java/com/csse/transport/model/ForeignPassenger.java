@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+//@Entity
 @Table(name = "foreign_passenger")
 public class ForeignPassenger extends Passenger{
 
 
     private String country;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
 
 //    @ManyToMany(fetch = FetchType.LAZY,
 //            cascade = {
@@ -38,19 +38,19 @@ public class ForeignPassenger extends Passenger{
         this.country = country;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

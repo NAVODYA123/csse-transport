@@ -2,7 +2,7 @@ package com.csse.transport.model;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Bus {
 
   @Id
