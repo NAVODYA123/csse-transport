@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping(path="/sl-trans")
 public class JourneyController {
-
+//
 //    @Autowired
 //    private JourneyRepository journeyRepository;
 //

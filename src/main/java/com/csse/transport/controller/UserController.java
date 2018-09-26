@@ -3,8 +3,15 @@ package com.csse.transport.controller;
 import com.csse.transport.model.User;
 import com.csse.transport.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.Map;
 
 @Controller  // This means that this class is a Controller
 @RequestMapping(path="/sl-trans") // This means URL's start with /sl-trans (after Application path)
@@ -32,6 +39,61 @@ public class UserController {
         //This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+
+//    @PostMapping("/create-user")
+//        public String createUser(@RequestBody Map<String, String> body){
+//
+//        String username = body.get("username");
+//        String password = body.get("password");
+//        User n = new User();
+//        n.setPassword(password);
+//        n.setUsername(username);
+//        userRepository.save(n);
+//        return "user crated";
+//    }
+
+//    @PostMapping("create-user")
+//    public ResponseEntity<Void> createUser(@RequestBody Map<String, String> body, UriComponentsBuilder builder) {
+//        User n = new User();
+//        String username = body.get("username");
+//       String password = body.get("password");
+//        n.setPassword(password);
+//      n.setUsername(username);
+//       userRepository.save(n);
+//        boolean flag = articleService.addArticle(article);
+//        if (flag == false) {
+//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//        }
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/article/{id}").buildAndExpand(article.getArticleId()).toUri());
+//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//    }
+    @PostMapping("/create-user")
+    public ResponseEntity<Object> createStudent(@Valid @RequestBody Map<String, String> body) {
+        User n = new User();
+        String username = body.get("username");
+        String password = body.get("password");
+        n.setPassword(password);
+        n.setUsername(username);
+        userRepository.save(n);
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(n.getId()).toUri();
+String message = "Successfull";
+        return ResponseEntity
+                .ok()
+                .body(message);
+
+    }
+
+//    @PutMapping("/user-update/{id}")
+//    public ResponseEntity<Object> updateStudent(@Valid @RequestBody User student, @PathVariable int id) {
+//        Optional<Student> studentOptional = studentRepository.findById(id);
+//        if (!studentOptional.isPresent())
+//            return ResponseEntity.notFound().build();
+//        student.setId(id);
+//        userRepository.save(student);
+//        return ResponseEntity.noContent().build();
+//    }
 }
 
 
