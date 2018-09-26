@@ -21,10 +21,36 @@ public class Passenger {
     private String type;
     private double amountAvailable;
     private String country;   //foreign
-    private Date startDate;  //foreign
-    private Date endDate;  //foreign
+    private String startDate;  //foreign
+    private String endDate;  //foreign
+    private String password;
+    private String accLevel;
 
-//
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus() {
+        this.status = true;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAccLevel() {
+        return accLevel;
+    }
+
+    public void setAccLevel(String accLevel) {
+        this.accLevel = accLevel;
+    }
+
+    //
 //    public Set<Journey> getJourneys() {
 //        return journeys;
 //    }
@@ -32,10 +58,10 @@ public class Passenger {
 //    public void setJourneys(Set<Journey> journeys) {
 //        this.journeys = journeys;
 //    }
-@OneToMany(
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Journey> journeys = new ArrayList<>();
 
     public String getPid() {
@@ -117,19 +143,19 @@ public class Passenger {
         this.country = country;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 }
