@@ -1,17 +1,12 @@
 package com.csse.transport.model;
 
-import org.hibernate.annotations.Fetch;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Bus {
 
   @Id
+  @Column(name="busId",nullable = false,unique=true,columnDefinition="VARCHAR(15)")
     private String BusID;
     private String make;
     private String type;

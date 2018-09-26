@@ -1,9 +1,8 @@
 package com.csse.transport.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 ///this class handles the route information for all routes
 @Entity
@@ -16,6 +15,17 @@ public class Route {
     private float OriginLongitude;
     private float DesLatitude;
     private float DesLongitude;
+
+    @ManyToMany(mappedBy = "route")
+    private Set<BusStop> busStop = new HashSet<>();
+
+    public Set<BusStop> getBusStop() {
+        return busStop;
+    }
+
+    public void setBusStop(Set<BusStop> busStop) {
+        this.busStop = busStop;
+    }
 
     public int getRouteID() {
         return RouteID;

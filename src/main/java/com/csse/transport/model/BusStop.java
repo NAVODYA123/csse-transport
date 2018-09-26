@@ -1,6 +1,8 @@
 package com.csse.transport.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -13,6 +15,17 @@ public class BusStop {
     private String BusHaltName;
     private float BusHaltLatitude;
     private float BusHaltLongitude;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "route_bus_stops",
+            joinColumns = { @JoinColumn(name = "BusHaltID") },
+            inverseJoinColumns = { @JoinColumn(name = "RouteID") })
+
+    private Set<Route> route = new HashSet<>();
 
     public String getBusHaltID() {
         return BusHaltID;
