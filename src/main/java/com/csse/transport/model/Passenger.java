@@ -9,8 +9,10 @@ import java.util.*;
 @Entity
 @Table(name = "passenger")
 public class Passenger {
+
+
     @Id
-    @Column(name="pid",nullable = false,unique=true,columnDefinition="VARCHAR(12)")
+    @Column(name="pid",columnDefinition="VARCHAR(12)")
     private String pid;
     private String name;
     private String email;
@@ -26,43 +28,12 @@ public class Passenger {
     private String password;
     private String accLevel;
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus() {
-        this.status = true;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAccLevel() {
-        return accLevel;
-    }
-
-    public void setAccLevel(String accLevel) {
-        this.accLevel = accLevel;
-    }
-
-    //
-//    public Set<Journey> getJourneys() {
-//        return journeys;
-//    }
-//
-//    public void setJourneys(Set<Journey> journeys) {
-//        this.journeys = journeys;
-//    }
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<Journey> journeys = new ArrayList<>();
+
 
     public String getPid() {
         return pid;
@@ -87,13 +58,6 @@ public class Passenger {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getSex() {
         return sex;
@@ -111,11 +75,11 @@ public class Passenger {
         this.phoneNo = phoneNo;
     }
 
-    public Boolean getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -125,6 +89,14 @@ public class Passenger {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getAmountAvailable() {
@@ -157,5 +129,29 @@ public class Passenger {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAccLevel() {
+        return accLevel;
+    }
+
+    public void setAccLevel(String accLevel) {
+        this.accLevel = accLevel;
+    }
+
+    public List<Journey> getJourneys() {
+        return journeys;
+    }
+
+    public void setJourneys(List<Journey> journeys) {
+        this.journeys = journeys;
     }
 }

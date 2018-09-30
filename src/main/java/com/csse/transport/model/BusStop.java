@@ -27,6 +27,14 @@ public class BusStop {
 
     private Set<Route> route = new HashSet<>();
 
+    public Set<Route> getRoute() {
+        return route;
+    }
+
+    public void setRoute(Set<Route> route) {
+        this.route = route;
+    }
+
     public String getBusHaltID() {
         return BusHaltID;
     }
