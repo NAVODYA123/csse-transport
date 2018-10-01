@@ -16,8 +16,19 @@ public class Route {
     private double DesLatitude;
     private double DesLongitude;
 
-    @ManyToMany(mappedBy = "route")
-    private Set<BusStop> busStop = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
+//    @JoinTable(name = "route_bus_stops",
+//            joinColumns = { @JoinColumn(name = "routeID") },
+//            inverseJoinColumns = { @JoinColumn(name = "busHaltID") })
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "route_bus_stop", joinColumns = @JoinColumn(name = "RouteID", referencedColumnName = "RouteID"),
+            inverseJoinColumns = @JoinColumn(name = "BusHaltID", referencedColumnName = "BusHaltID"))
+    private Set<BusStop> busStop ;
 
     public int getRouteID() {
         return RouteID;

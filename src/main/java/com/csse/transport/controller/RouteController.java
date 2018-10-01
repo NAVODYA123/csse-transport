@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,9 +22,9 @@ public class RouteController {
 
 
     @PostMapping("/add-route")
-    public ResponseEntity<Object> addNewRoute(@Valid @RequestBody Route body) {
+    public ResponseEntity<Object> addNewRoute(@Valid @RequestBody Route r) {
 
-        Route r = new Route();
+//        Route r = new Route();
 //        r.setRouteID(Integer.parseInt(body.get("routeId")));
 //        r.setOrigin(body.get("origin"));
 //        r.setOriginLatitude(Double.parseDouble(body.get("originLatitude")));
@@ -32,20 +33,24 @@ public class RouteController {
 //        r.setDesLatitude(Double.parseDouble(body.get("DesLatitude")));
 //        r.setDesLongitude(Double.parseDouble(body.get("DesLongitude")));
 
-        r.setRouteID(body.getRouteID());
-        r.setOrigin(body.getOrigin());
-        r.setOriginLatitude(body.getOriginLatitude());
-        r.setOriginLongitude(body.getOriginLongitude());
-        r.setDestination(body.getDestination());
-       r.setDesLatitude(body.getDesLatitude());
-       r.setDesLongitude(body.getDesLongitude());
-       for( BusStop b:body.getBusStop()){
-           r.getBusStop().add(b);
-           b.getRoute().add(r);
+//        r.setRouteID(body.getRouteID());
+//        r.setOrigin(body.getOrigin());
+//        r.setOriginLatitude(body.getOriginLatitude());
+//        r.setOriginLongitude(body.getOriginLongitude());
+//        r.setDestination(body.getDestination());
+//       r.setDesLatitude(body.getDesLatitude());
+//       r.setDesLongitude(body.getDesLongitude());
+
+     Set<BusStop> busHalts = new HashSet<>();
+       for( BusStop b:r.getBusStop()){
+        busHalts.add(b);
            System.out.println(b.getTown());
         }
+        r.setBusStop(busHalts);
 
-        boolean flag = routeRepository.save(r);
+
+
+        routeRepository.save(r);
 
         String message = "Successfull";
         return ResponseEntity

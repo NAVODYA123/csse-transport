@@ -21,12 +21,6 @@ public class BusStopController {
     @PostMapping("/add-bus-halt")
     public ResponseEntity<Object> addNewBusStop(@Valid @RequestBody BusStop bs) {
 
-//        BusStop bs = new BusStop();
-//        bs.setBusHaltID(body.get("busHaltId"));
-//        bs.setTown(body.get("town"));
-//        bs.setBusHaltName(body.get("busHaltName"));
-//        bs.setBusHaltLatitude(Double.parseDouble(body.get("busHaltLatitude")));
-//        bs.setBusHaltLongitude(Double.parseDouble(body.get("busHaltLongitude")));
         busstopRepository.save(bs);
 
         String message = "Successfull";

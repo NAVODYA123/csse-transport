@@ -6,6 +6,7 @@ import java.util.Set;
 
 
 @Entity
+@Table(name = "bus_stop")
 public class BusStop {
 
     @Id
@@ -16,16 +17,9 @@ public class BusStop {
     private double BusHaltLatitude;
     private double BusHaltLongitude;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "route_bus_stops",
-            joinColumns = { @JoinColumn(name = "BusHaltID") },
-            inverseJoinColumns = { @JoinColumn(name = "RouteID") })
 
-    private Set<Route> route = new HashSet<>();
+    @ManyToMany (mappedBy = "busStop", fetch = FetchType.EAGER)
+    private Set<Route> route;
 
     public String getBusHaltID() {
         return BusHaltID;
