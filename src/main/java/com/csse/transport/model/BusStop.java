@@ -13,8 +13,8 @@ public class BusStop {
     private String BusHaltID;
     private String Town;
     private String BusHaltName;
-    private float BusHaltLatitude;
-    private float BusHaltLongitude;
+    private double BusHaltLatitude;
+    private double BusHaltLongitude;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -26,14 +26,6 @@ public class BusStop {
             inverseJoinColumns = { @JoinColumn(name = "RouteID") })
 
     private Set<Route> route = new HashSet<>();
-
-    public Set<Route> getRoute() {
-        return route;
-    }
-
-    public void setRoute(Set<Route> route) {
-        this.route = route;
-    }
 
     public String getBusHaltID() {
         return BusHaltID;
@@ -59,19 +51,27 @@ public class BusStop {
         BusHaltName = busHaltName;
     }
 
-    public float getBusHaltLatitude() {
+    public double getBusHaltLatitude() {
         return BusHaltLatitude;
     }
 
-    public void setBusHaltLatitude(float busHaltLatitude) {
+    public void setBusHaltLatitude(double busHaltLatitude) {
         BusHaltLatitude = busHaltLatitude;
     }
 
-    public float getBusHaltLongitude() {
+    public double getBusHaltLongitude() {
         return BusHaltLongitude;
     }
 
-    public void setBusHaltLongitude(float busHaltLongitude) {
+    public void setBusHaltLongitude(double busHaltLongitude) {
         BusHaltLongitude = busHaltLongitude;
+    }
+
+    public Set<Route> getRoute() {
+        return route;
+    }
+
+    public void setRoute(Set<Route> route) {
+        this.route = route;
     }
 }

@@ -69,12 +69,12 @@ public class UserController {
 //        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 //    }
     @PostMapping("/create-user")
-    public ResponseEntity<Object> createStudent(@Valid @RequestBody Map<String, String> body) {
-        User n = new User();
-        String username = body.get("username");
-        String password = body.get("password");
-        n.setPassword(password);
-        n.setUsername(username);
+    public ResponseEntity<Object> createStudent(@Valid @RequestBody User n) {
+//        User n = new User();
+//        String username = body.get("username");
+//        String password = body.get("password");
+//        n.setPassword(password);
+//        n.setUsername(username);
         userRepository.save(n);
 //        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 //                .buildAndExpand(n.getId()).toUri();

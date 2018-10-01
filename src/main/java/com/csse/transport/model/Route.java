@@ -11,21 +11,13 @@ public class Route {
     private int RouteID;
     private String Origin;
     private String Destination;
-    private float OriginLatitude;
-    private float OriginLongitude;
-    private float DesLatitude;
-    private float DesLongitude;
+    private double OriginLatitude;
+    private double OriginLongitude;
+    private double DesLatitude;
+    private double DesLongitude;
 
     @ManyToMany(mappedBy = "route")
     private Set<BusStop> busStop = new HashSet<>();
-
-    public Set<BusStop> getBusStop() {
-        return busStop;
-    }
-
-    public void setBusStop(Set<BusStop> busStop) {
-        this.busStop = busStop;
-    }
 
     public int getRouteID() {
         return RouteID;
@@ -51,35 +43,43 @@ public class Route {
         Destination = destination;
     }
 
-    public float getOriginLatitude() {
+    public double getOriginLatitude() {
         return OriginLatitude;
     }
 
-    public void setOriginLatitude(float originLatitude) {
+    public void setOriginLatitude(double originLatitude) {
         OriginLatitude = originLatitude;
     }
 
-    public float getOriginLongitude() {
+    public double getOriginLongitude() {
         return OriginLongitude;
     }
 
-    public void setOriginLongitude(float originLongitude) {
+    public void setOriginLongitude(double originLongitude) {
         OriginLongitude = originLongitude;
     }
 
-    public float getDesLatitude() {
+    public double getDesLatitude() {
         return DesLatitude;
     }
 
-    public void setDesLatitude(float desLatitude) {
+    public void setDesLatitude(double desLatitude) {
         DesLatitude = desLatitude;
     }
 
-    public float getDesLongitude() {
+    public double getDesLongitude() {
         return DesLongitude;
     }
 
-    public void setDesLongitude(float desLongitude) {
+    public void setDesLongitude(double desLongitude) {
         DesLongitude = desLongitude;
+    }
+
+    public Set<BusStop> getBusStop() {
+        return busStop;
+    }
+
+    public void setBusStop(Set<BusStop> busStop) {
+        this.busStop = busStop;
     }
 }
