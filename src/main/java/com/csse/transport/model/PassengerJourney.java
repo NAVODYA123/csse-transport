@@ -1,33 +1,48 @@
 package com.csse.transport.model;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.io.Serializable;
+
 
 @Entity(name = "PassengerJourney")
 @Table(name = "passenger_journey")
-public class PassengerJourney {
+public class PassengerJourney implements Serializable {
 
 
     @EmbeddedId
-    private PassengerJourneyId id;
+    private PassengerJourneyId id = new PassengerJourneyId();
+//   @MapsId("JourneyId")
+//   @MapsId("PassengerId")
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("JourneyId")
+
+//    @Id
+    @ManyToOne
+//    @JoinColumn(name = "journey_id")
+       @MapsId("JourneyId")
     private Journey journey;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @Id
+    @ManyToOne
+//    @JoinColumn(name = "passenger_id")
     @MapsId("PassengerId")
     private Passenger passenger;
 
     @Column
     private  double originLat;
 
-    public PassengerJourneyId getId() {
-        return id;
-    }
+    @Column
+    private double originLon;
+    @Column
+    private double destLat;
+    @Column
+    private double destLon;
+    @Column
+    private  double fee;
 
-    public void setId(PassengerJourneyId id) {
-        this.id = id;
+    public PassengerJourney(Journey j,Passenger p){
+        this.journey = j;
+        this.passenger = p;
+        this.id = new PassengerJourneyId(j.getJourneyId(),p.getPid());
     }
 
     public Journey getJourney() {
@@ -37,6 +52,7 @@ public class PassengerJourney {
     public void setJourney(Journey journey) {
         this.journey = journey;
     }
+
 
     public Passenger getPassenger() {
         return passenger;
@@ -86,15 +102,7 @@ public class PassengerJourney {
         this.fee = fee;
     }
 
-    @Column
-    private double originLon;
-    @Column
-    private double destLat;
-    @Column
-    private double destLon;
-    @Column
-    private  double fee;
-//
+
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;

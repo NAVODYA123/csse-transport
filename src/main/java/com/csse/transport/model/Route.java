@@ -1,5 +1,8 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +31,7 @@ public class Route {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "route_bus_stop", joinColumns = @JoinColumn(name = "RouteID", referencedColumnName = "RouteID"),
             inverseJoinColumns = @JoinColumn(name = "BusHaltID", referencedColumnName = "BusHaltID"))
+    @JsonIgnoreProperties
     private Set<BusStop> busStop ;
 
     public int getRouteID() {

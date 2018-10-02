@@ -12,6 +12,11 @@ public class PassengerJourneyId implements Serializable {
     @Column(name = "passenger_id")
     private String PassengerId;
 
+    public PassengerJourneyId(){}
+    public PassengerJourneyId(int jid,String pid){
+        this.JourneyId = jid;
+        this.PassengerId = pid;
+    }
     public int getJourneyId() {
         return JourneyId;
     }

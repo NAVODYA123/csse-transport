@@ -2,6 +2,7 @@ package com.csse.transport.controller;
 
 import com.csse.transport.model.BusStop;
 import com.csse.transport.repository.BusStopRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,8 +32,11 @@ public class BusStopController {
     }
 
     @GetMapping(path="/all-stops")
+
     public @ResponseBody Iterable<BusStop> getAllBusStops(){
         //This returns a JSON or XML with the users
+        System.out.println();
+
         return busstopRepository.findAll();
     }
 }

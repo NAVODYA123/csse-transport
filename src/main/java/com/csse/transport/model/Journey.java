@@ -2,29 +2,40 @@ package com.csse.transport.model;
 
 import javax.persistence.*;
 import java.util.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "journey")
-public class Journey {
+public class Journey implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int journeyId;
     private String busID;
     private Date date_journey;
+    private String routeID;
 
+    public String getRouteID() {
+        return routeID;
+    }
+
+    public void setRouteID(String routeID) {
+        this.routeID = routeID;
+    }
 
     //configuring many to many relationship with passenger
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Passenger> passengers = new ArrayList<>();
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PassengerJourney> passengerJourneys ;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "RouteID", nullable = false)
-        private Route route;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "RouteID", nullable = false)
+//        private Route route;
 
+    public void addPassenger(Passenger pas){
+        PassengerJourney pj = new PassengerJourney(this,pas);
+        passengerJourneys.add(pj);
+        pas.getPassengerJourneys().add(pj);
+    }
 
     public int getJourneyId() {
         return journeyId;
@@ -50,21 +61,15 @@ public class Journey {
         this.date_journey = date_journey;
     }
 
-    public List<Passenger> getPassengers() {
-        return passengers;
+    public Set<PassengerJourney> getPassengerJourneys() {
+        return passengerJourneys;
     }
 
-    public void setPassengers(List<Passenger> passengers) {
-        this.passengers = passengers;
+    public void setPassengerJourneys(Set<PassengerJourney> passengerJourneys) {
+        this.passengerJourneys = passengerJourneys;
     }
 
-    public Route getRoute() {
-        return route;
-    }
 
-    public void setRoute(Route route) {
-        this.route = route;
-    }
 }
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)

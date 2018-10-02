@@ -1,5 +1,7 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +21,7 @@ public class BusStop {
 
 
     @ManyToMany (mappedBy = "busStop", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Route> route;
 
     public String getBusHaltID() {

@@ -4,11 +4,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.*;
-
+import java.io.Serializable;
 
 @Entity
 @Table(name = "passenger")
-public class Passenger {
+public class Passenger implements Serializable{
 
 
     @Id
@@ -28,11 +28,8 @@ public class Passenger {
     private String password;
     private String accLevel;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Journey> journeys = new ArrayList<>();
+    @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PassengerJourney> passengerJourneys;
 
 
     public String getPid() {
@@ -147,11 +144,11 @@ public class Passenger {
         this.accLevel = accLevel;
     }
 
-    public List<Journey> getJourneys() {
-        return journeys;
+    public Set<PassengerJourney> getPassengerJourneys() {
+        return passengerJourneys;
     }
 
-    public void setJourneys(List<Journey> journeys) {
-        this.journeys = journeys;
+    public void setPassengerJourneys(Set<PassengerJourney> passengerJourneys) {
+        this.passengerJourneys = passengerJourneys;
     }
 }
