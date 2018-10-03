@@ -3,7 +3,9 @@ package com.csse.transport.service.FeeFactory;
 import com.csse.transport.model.Fee;
 import com.csse.transport.repository.FeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 abstract public class FeeAbs {
 
     private double initialPrice;
@@ -30,7 +32,6 @@ abstract public class FeeAbs {
     }
 
     @Autowired
-
     protected FeeRepository feeRepository;
 
     public FeeAbs(int id){
