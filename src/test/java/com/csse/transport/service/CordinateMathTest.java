@@ -4,14 +4,18 @@ import com.csse.transport.model.BusStop;
 import com.csse.transport.model.Journey;
 import com.csse.transport.repository.RouteRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CordinateMathTest {
 
     @Autowired
@@ -27,19 +31,19 @@ public class CordinateMathTest {
 
     }
 
-//    @Test
-//    public void test2(){
-//
-//
-//        CordinateMath cm2 = new CordinateMath();
-//        Journey journey = new Journey();
-//        Set<BusStop> set = repo.findByRouteID(98).getBusStop();
-//        List bslist  = new ArrayList(set);
-//
-//      BusStop tbs =   cm2.findNearestHalt(bslist,6.640694, 80.505431);
-//        String result = tbs.getTown();
-//
-//            assertEquals("Pelmadulla",result);
-//    }
+    @Test
+    public void test2(){
+
+
+        CordinateMath cm2 = new CordinateMath();
+        Journey journey = new Journey();
+        Set<BusStop> set = repo.findByRouteID(98).getBusStop();
+        List bslist  = new ArrayList(set);
+
+      BusStop tbs =   cm2.findNearestHalt(bslist,6.640694, 80.505431);
+        String result = tbs.getTown();
+
+            assertEquals("Pelmadulla",result);
+    }
 
 }
