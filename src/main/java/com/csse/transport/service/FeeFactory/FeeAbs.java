@@ -4,7 +4,6 @@ import com.csse.transport.model.Fee;
 import com.csse.transport.repository.FeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 @Controller
 abstract public class FeeAbs {
 

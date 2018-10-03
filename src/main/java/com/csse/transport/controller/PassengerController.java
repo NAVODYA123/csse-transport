@@ -57,8 +57,7 @@ public class PassengerController {
     }
 
     @GetMapping(path="/getSpecPassenger")
-    public @ResponseBody
-    Passenger getPassengersByPid(@RequestParam String pid){
+    public @ResponseBody Passenger getPassengersByPid(@RequestParam String pid){
         //This returns a JSON or XML with the users
         return passengerRepository.findByPid(pid);
     }
