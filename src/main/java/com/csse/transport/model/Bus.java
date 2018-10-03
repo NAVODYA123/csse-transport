@@ -1,21 +1,24 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
-
 @Table(name = "bus_Details")
 public class Bus {
 
   @Id
   @Column(name="busId",nullable = false,unique=true,columnDefinition="VARCHAR(15)")
-    private String BusID;
+    private String busID;
     private String make;
     private String type;
 
  @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "RouteID",nullable = false)
+ @JsonIgnore
     private Route route;
+
     private  String OwnerName;
 
 
@@ -36,11 +39,11 @@ public class Bus {
    }
 
     public String getBusID() {
-        return BusID;
+        return busID;
     }
 
     public void setBusID(String busID) {
-        BusID = busID;
+        this.busID = busID;
     }
 
     public String getMake() {
