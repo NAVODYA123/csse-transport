@@ -12,8 +12,10 @@ import java.util.Map;
 @RequestMapping(path="/passenger")
 public class PassengerController {
 
+
     @Autowired
     private PassengerRepository passengerRepository;
+
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewPassenger (@RequestBody Map<String, String> body){

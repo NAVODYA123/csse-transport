@@ -6,4 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 // This will be AUTO IMPLEMENTED by Spring into a Bean called routeRepository
 
 public interface RouteRepository extends CrudRepository<Route,Integer> {
+
+    public Route findByRouteID(int RouteID);
 }

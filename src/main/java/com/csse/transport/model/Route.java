@@ -1,17 +1,16 @@
 package com.csse.transport.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 ///this class handles the route information for all routes
 @Entity
 public class Route {
+
     @Id
-    private int RouteID;
+    private int routeID;
     private String Origin;
     private String Destination;
     private double OriginLatitude;
@@ -29,17 +28,17 @@ public class Route {
 //            inverseJoinColumns = { @JoinColumn(name = "busHaltID") })
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "route_bus_stop", joinColumns = @JoinColumn(name = "RouteID", referencedColumnName = "RouteID"),
+    @JoinTable(name = "route_bus_stop", joinColumns = @JoinColumn(name = "routeID", referencedColumnName = "routeID"),
             inverseJoinColumns = @JoinColumn(name = "BusHaltID", referencedColumnName = "BusHaltID"))
     @JsonIgnoreProperties
     private Set<BusStop> busStop ;
 
     public int getRouteID() {
-        return RouteID;
+        return routeID;
     }
 
     public void setRouteID(int routeID) {
-        RouteID = routeID;
+        this.routeID = routeID;
     }
 
     public String getOrigin() {
