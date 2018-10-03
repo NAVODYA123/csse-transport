@@ -2,7 +2,9 @@ package com.csse.transport.model;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
+
+@Table(name = "bus_Details")
 public class Bus {
 
   @Id
@@ -11,17 +13,27 @@ public class Bus {
     private String make;
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+ @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "RouteID",nullable = false)
     private Route route;
+    private  String OwnerName;
 
-    public Route getRoute() {
-        return route;
+
+    public String getOwnerName() {
+        return OwnerName;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setOwnerName(String ownerName) {
+        OwnerName = ownerName;
     }
+
+   public Route getRoute() {
+       return route;
+    }
+
+   public void setRoute(Route route) {
+      this.route = route;
+   }
 
     public String getBusID() {
         return BusID;
