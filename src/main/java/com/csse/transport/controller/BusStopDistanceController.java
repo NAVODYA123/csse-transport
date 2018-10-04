@@ -1,8 +1,7 @@
 package com.csse.transport.controller;
 
-import com.csse.transport.model.BusFare;
 import com.csse.transport.model.BusStop;
-import com.csse.transport.repository.BusFareRepository;
+import com.csse.transport.repository.BusStopDistanceRepository;
 import com.csse.transport.repository.RouteRepository;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,10 @@ import java.util.*;
 
 @Controller
 @RequestMapping(path="/bus-fare")
-public class BusFareController {
+public class BusStopDistanceController {
 
     @Autowired
-    private BusFareRepository busFareRepository;
+    private BusStopDistanceRepository busFareRepository;
     @Autowired
     private RouteRepository routeRepository;
 
