@@ -15,8 +15,10 @@ import java.util.Map;
 @RequestMapping(path="/passenger")
 public class PassengerController {
 
+
     @Autowired
     private PassengerRepository passengerRepository;
+
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewPassenger (@RequestBody Map<String, String> body){
@@ -66,8 +68,7 @@ public class PassengerController {
     }
 
     @GetMapping(path="/getSpecPassenger")
-    public @ResponseBody
-    Passenger getPassengersByPid(@RequestParam String pid){
+    public @ResponseBody Passenger getPassengersByPid(@RequestParam String pid){
         //This returns a JSON or XML with the users
         return passengerRepository.findByPid(pid);
     }

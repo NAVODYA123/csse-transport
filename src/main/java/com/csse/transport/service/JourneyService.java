@@ -20,12 +20,12 @@ public class JourneyService implements IJourneyService {
         return  journeyRepository.findByjourneyId(journeyID);
 
     }
-    public synchronized boolean addJourney(Journey journey){
-        Journey journ = journeyRepository.findByjourneyId(journey.getJourneyId());
-
-      if(journ.getJourneyId() == journey.getJourneyId()){
-          return true;
-      }
-      else return false;
-    }
+//    public synchronized boolean addJourney(Journey journey){
+//        Journey journ = journeyRepository.findByBusIDAndDate_journeyAAndRouteID(journey.getBusID(),journey.getDate_journey(),journey.getRouteID());
+//
+//      if(journ.getJourneyId() == journey.getJourneyId()){
+//          return true;
+//      }
+//      else return false;
+//    }
 }

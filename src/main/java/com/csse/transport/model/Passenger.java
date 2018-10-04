@@ -1,5 +1,7 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -29,6 +31,7 @@ public class Passenger implements Serializable{
     private String accLevel;
 
     @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<PassengerJourney> passengerJourneys;
 
 

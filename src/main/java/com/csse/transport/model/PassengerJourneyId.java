@@ -32,4 +32,22 @@ public class PassengerJourneyId implements Serializable {
     public void setPassengerId(String passengerId) {
         PassengerId = passengerId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PassengerJourneyId that = (PassengerJourneyId) o;
+
+        if (!(JourneyId==that.JourneyId)) return false;
+        return PassengerId.equals(that.PassengerId);
+    }
+
+//    @Override
+//    public int hashCode() {
+//        int result = JourneyId.;
+//        result = 31 * result + PassengerId.hashCode();
+//        return result;
+//    }
 }
