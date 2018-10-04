@@ -1,93 +1,61 @@
 package com.csse.transport.model;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 
 
 @Entity
 public class BusFare {
     @Id
-    @Column(name="BusFareID",nullable = false,unique=true,columnDefinition="VARCHAR(12)")
-    private String BusFareID;
-    private String RouteID;
-    private String Halt_1ID;
-    private String Halt_2ID;
-    private float Halt1Latitude;
-    private float Halt1Longitude;
-    private float Halt2Latitude;
-    private float Halt2Longitude;
-    private float DistanceBetweenHalts;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+   private int id;
 
+    private String busHalt1;
+    private String busHalt2;
+    private  double distance;
 
-    public String getBusFareID() {
-        return BusFareID;
+    public String getRouteId() {
+        return routeId;
     }
 
-    public void setBusFareID(String busFareID) {
-        BusFareID = busFareID;
+    public void setRouteId(String routeId) {
+        this.routeId = routeId;
+    }
+
+    private String routeId;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getBusHalt1() {
+        return busHalt1;
+    }
+
+    public void setBusHalt1(String busHalt1) {
+        this.busHalt1 = busHalt1;
+    }
+
+    public String getBusHalt2() {
+        return busHalt2;
+    }
+
+    public void setBusHalt2(String busHalt2) {
+        this.busHalt2 = busHalt2;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
 
-    public String getRouteID() {
-        return RouteID;
-    }
-
-    public void setRouteID(String routeID) {
-        RouteID = routeID;
-    }
-
-    public String getHalt_1ID() {
-        return Halt_1ID;
-    }
-
-    public void setHalt_1ID(String halt_1ID) {
-        Halt_1ID = halt_1ID;
-    }
-
-    public String getHalt_2ID() {
-        return Halt_2ID;
-    }
-
-    public void setHalt_2ID(String halt_2ID) {
-        Halt_2ID = halt_2ID;
-    }
-
-    public float getHalt1Latitude() {
-        return Halt1Latitude;
-    }
-
-    public void setHalt1Latitude(float halt1Latitude) {
-        Halt1Latitude = halt1Latitude;
-    }
-
-    public float getHalt1Longitude() {
-        return Halt1Longitude;
-    }
-
-    public void setHalt1Longitude(float halt1Longitude) {
-        Halt1Longitude = halt1Longitude;
-    }
-
-    public float getHalt2Latitude() {
-        return Halt2Latitude;
-    }
-
-    public void setHalt2Latitude(float halt2Latitude) {
-        Halt2Latitude = halt2Latitude;
-    }
-
-    public float getHalt2Longitude() {
-        return Halt2Longitude;
-    }
-
-    public void setHalt2Longitude(float halt2Longitude) {
-        Halt2Longitude = halt2Longitude;
-    }
-
-    public float getDistanceBetweenHalts() {
-        return DistanceBetweenHalts;
-    }
-
-    public void setDistanceBetweenHalts(float distanceBetweenHalts) {
-        DistanceBetweenHalts = distanceBetweenHalts;
-    }
 }

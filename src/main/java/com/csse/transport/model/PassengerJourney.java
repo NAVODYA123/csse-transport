@@ -1,7 +1,11 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity(name = "PassengerJourney")
@@ -11,25 +15,41 @@ public class PassengerJourney implements Serializable {
 
     @EmbeddedId
     private PassengerJourneyId id = new PassengerJourneyId();
-//   @MapsId("JourneyId")
-//   @MapsId("PassengerId")
 
-
-//    @Id
     @ManyToOne
-//    @JoinColumn(name = "journey_id")
-       @MapsId("JourneyId")
+    @MapsId("JourneyId")
+    @JsonIgnore
     private Journey journey;
 
-//    @Id
     @ManyToOne
-//    @JoinColumn(name = "passenger_id")
     @MapsId("PassengerId")
+
+    @JsonIgnore
     private Passenger passenger;
 
     @Column
-    private  double originLat;
+    private String origin;
+    @Column
+    private String destination;
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    @Column
+    private  double originLat;
     @Column
     private double originLon;
     @Column
@@ -38,11 +58,31 @@ public class PassengerJourney implements Serializable {
     private double destLon;
     @Column
     private  double fee;
+    @Column
+    private boolean status;
 
-    public PassengerJourney(Journey j,Passenger p){
+    public PassengerJourneyId getId() {
+        return id;
+    }
+
+    public void setId(PassengerJourneyId id) {
+        this.id = id;
+    }
+
+    public PassengerJourney(){};
+
+    public PassengerJourney(Journey j, Passenger p){
         this.journey = j;
         this.passenger = p;
         this.id = new PassengerJourneyId(j.getJourneyId(),p.getPid());
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Journey getJourney() {
@@ -103,17 +143,17 @@ public class PassengerJourney implements Serializable {
     }
 
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//
-//        if (o == null || getClass() != o.getClass())
-//            return false;
-//
-//        PassengerJourney that = (PassengerJourney) o;
-//        return Objects.equals(Journey, that.Journey) &&
-//                Objects.equals(Passenger, that.Passenger);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        PassengerJourney that = (PassengerJourney) o;
+        return Objects.equals(journey, that.journey) &&
+                Objects.equals(passenger, that.passenger);
+    }
 //
 //    @Override
 //    public int hashCode() {

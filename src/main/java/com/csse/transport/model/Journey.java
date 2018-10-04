@@ -12,13 +12,13 @@ public class Journey implements Serializable{
     private int journeyId;
     private String busID;
     private Date date_journey;
-    private String routeID;
+    private int routeID;
 
-    public String getRouteID() {
+    public int getRouteID() {
         return routeID;
     }
 
-    public void setRouteID(String routeID) {
+    public void setRouteID(int routeID) {
         this.routeID = routeID;
     }
 

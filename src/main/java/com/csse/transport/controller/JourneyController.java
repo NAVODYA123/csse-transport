@@ -1,22 +1,22 @@
 package com.csse.transport.controller;
 
 
-import com.csse.transport.model.Journey;
-import com.csse.transport.model.Passenger;
-import com.csse.transport.repository.JourneyRepository;
-import com.csse.transport.repository.PassengerRepository;
-import com.csse.transport.repository.UserRepository;
+import com.csse.transport.model.*;
+import com.csse.transport.repository.*;
+import com.csse.transport.service.CordinateMath;
 import com.csse.transport.service.JourneyService;
+import javafx.application.Application;
+import org.hibernate.boot.jaxb.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Entity;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(path="/journey")
@@ -24,37 +24,101 @@ public class JourneyController {
 
     @Autowired
     private JourneyRepository journeyRepository;
-    private    PassengerRepository passengerRep;
-
+    @Autowired
+    private PassengerRepository passengerRepository;
+    @Autowired
+    private PassengerJourneyRepository passengerJourneyRepository;
+    @Autowired
+    private RouteRepository  routeRepository;
+// Trigger this method by driver before starting the journey
     @PostMapping("/journey-start")
-    public ResponseEntity<Object> startJourney(@RequestBody Map<String, String> body) {
+    public ResponseEntity startJourney(@RequestBody Map<String, String> body) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         System.out.println(formatter.format(date));
         Journey j = new Journey();
     j.setBusID(body.get("bus_id"));
     j.setDate_journey(date);
-    j.setRouteID(body.get("route_id"));
+    j.setRouteID(Integer.parseInt(body.get("route_id")));
 
-        JourneyService journeyService = new JourneyService();
-        boolean flag = journeyService.addJourney(j);
+//        JourneyService journeyService = new JourneyService();
+//        boolean flag = journeyService.addJourney(j);
 //        Passenger pas = passengerRep.findByPid(body.get("passengerID"));
         Journey savedJourney = journeyRepository.save(j);
 
-
-        if(flag == true){
+        System.out.println(savedJourney.getJourneyId());
+//            return new ResponseEntity<Journey>(savedJourney,HttpStatus.NO_CONTENT);
             return ResponseEntity
                     .unprocessableEntity()
                     .body("Journey record saved successfully.");
-        }else{
-            return ResponseEntity
-                    .ok()
-                    .body("Journey record saved failed.");
-        }
 
 
 
     }
+
+    //This method is triggered whenever a passenger enter his/her card to the card reader
+    @PostMapping("/slide-card-start")
+    public ResponseEntity slideTheCard(@RequestBody Map<String,String> body){
+
+        String pid = body.get("pid");
+        int jid = Integer.parseInt(body.get("jid"));
+        double cLati =Double.parseDouble(body.get("originLat"));
+        double cLon = Double.parseDouble(body.get("originLon"));
+
+        Journey journey = journeyRepository.findByjourneyId(jid);
+        Passenger passenger = passengerRepository.findByPid(pid);
+
+        System.out.println(passenger.getName());
+
+        Set<BusStop> set = routeRepository.findByRouteID(journey.getRouteID()).getBusStop();
+        List bslist  = new ArrayList(set);
+
+        //get nearest bus stop for the passenger geo cordinates
+        CordinateMath cm = new CordinateMath();
+        BusStop originBusStop = cm.findNearestHalt(bslist,cLati,cLon);
+
+        System.out.println(originBusStop.getTown());
+        PassengerJourney passengerJourney = passengerJourneyRepository.findByid(new PassengerJourneyId(jid,pid));
+
+        PassengerJourney pj  = new PassengerJourney(journey,passenger);
+        if(passengerJourney!=null){
+            pj.setStatus(false);
+            pj.setDestLat(originBusStop.getBusHaltLatitude());
+            pj.setDestLon(originBusStop.getBusHaltLongitude());
+            pj.setDestination(originBusStop.getBusHaltName());
+            pj.setOriginLat(passengerJourney.getOriginLat());
+            pj.setOriginLon(passengerJourney.getOriginLon());
+            pj.setOrigin(passengerJourney.getOrigin());
+
+        }else{
+            pj.setStatus(true);
+            pj.setOriginLat(originBusStop.getBusHaltLatitude());
+            pj.setOriginLon(originBusStop.getBusHaltLongitude());
+            pj.setOrigin(originBusStop.getBusHaltName());
+
+        }
+        PassengerJourney saved = passengerJourneyRepository.save(pj);
+        return ResponseEntity
+                .ok()
+                .body("success");
+
+    }
+    @GetMapping(path="/get-journey")
+    public @ResponseBody PassengerJourney getJourneyByj(){
+        //This returns a JSON or XML with the users
+//        return passengerJourneyRepository.findByPassengerJourneyIdJourneyId(jid);
+        PassengerJourney pi= null;
+       try {
+           PassengerJourneyId pk =new PassengerJourneyId(1,"940");
+           pi =passengerJourneyRepository.findByid(pk);
+           System.out.println(pi.getOrigin());
+       }
+       catch (Exception ex){
+           System.out.println(ex.toString());
+       }
+        return  pi;
+    }
+
 
 }
 
