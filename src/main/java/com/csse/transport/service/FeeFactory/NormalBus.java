@@ -1,19 +1,22 @@
 package com.csse.transport.service.FeeFactory;
 
+import com.csse.transport.controller.FeeController;
+import com.csse.transport.service.FeeService;
+
 public class NormalBus extends FeeAbs{
 
     NormalBus(double distance){
-        super(1);
+        super();
         calcFee();
         this.distance = distance;
     }
-
+    FeeService fc = new FeeService();
     @Override
     public double calcFee(){
 
-        setInitialPrice(feeData.getInitialprice());
-        setClassFactor(feeData.getClassFactor());
+        setInitialPrice(fc.getDetail(1).getInitialprice());
+        setClassFactor(fc.getDetail(1).getClassFactor());
 
-        return applyAlgorithm();
+        return getClassFactor()*applyAlgorithm();
     }
 }

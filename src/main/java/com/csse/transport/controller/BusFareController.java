@@ -20,6 +20,7 @@ public class BusFareController {
     @Autowired
     private RouteRepository routeRepository;
 
+    //populate all posible distinct pairs of bus halts in a particular route
     @GetMapping(path="/all-bus-halt-combinations")
     public @ResponseBody ArrayList<Pair<String,String>> getAllUsers(@RequestParam int routeID){
         ArrayList<Pair<String,String>>al = new ArrayList<>();
@@ -30,10 +31,9 @@ public class BusFareController {
                 al.add(new Pair<String, String>(bslist.get(i).getBusHaltName(),bslist.get(j).getBusHaltName()));
            }
         }
-
-
         return al;
     }
+
 
 
 }
