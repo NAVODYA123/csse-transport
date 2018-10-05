@@ -3,6 +3,7 @@ package com.csse.transport.controller;
 import com.csse.transport.model.BusStop;
 import com.csse.transport.model.Route;
 import com.csse.transport.repository.RouteRepository;
+import com.csse.transport.service.FeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,11 @@ public class RouteController {
     private RouteRepository routeRepository;
 
 
+
+
     @PostMapping("/add-route")
     public ResponseEntity<Object> addNewRoute(@Valid @RequestBody Route r) {
+
 
      Set<BusStop> busHalts = new HashSet<>();
        for( BusStop b:r.getBusStop()){
@@ -49,6 +53,7 @@ public class RouteController {
     @GetMapping(path = "/all-routes-only")
     public @ResponseBody
     Iterable<Integer> getAllRoutes_only() {
+
         //This returns a JSON or XML with the users
         return routeRepository.findrouteIds();
     }

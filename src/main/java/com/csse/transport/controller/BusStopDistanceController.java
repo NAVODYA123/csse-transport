@@ -48,17 +48,17 @@ public class BusStopDistanceController {
   @SuppressWarnings("unchecked")
   @JsonProperty("bs")
 //    @RequestMapping(value="/add-bus-stop-distance", method=RequestMethod.POST,consumes="application/json",produces="application/json")
-        public ResponseEntity<Object> addBusStopDistance(@Valid @RequestBody Map<String,Object[]> body) throws IOException {
+        public ResponseEntity<Object> addBusStopDistance(@Valid @RequestBody Map<String,Object> body) throws IOException {
 
 //       body.get("bs");
-     System.out.println(body.get("bs").length);
+     System.out.println(body.get("bs"));
 
 
-        for(int i=0;i<body.get("bs").length;i++){
-
-            System.out.println(body.get(i));
-//            busFareRepository.save(body.get(i));
-        }
+//        for(int i=0;i<body.get("bs").length;i++){
+//
+//            System.out.println(body.get(i));
+////            busFareRepository.save(body.get(i));
+//        }
       ObjectMapper mapper = new ObjectMapper();
 
 //          List<MapperBusStop> myObjects = mapper.readValue(body.get("bs"), new TypeReference<List<MapperBusStop>>(){});

@@ -11,7 +11,7 @@ public class FeeFactoryTest {
 
     FeeFactory ff = new FeeFactory(200);
 
-   FeeAbs fa =  ff.getFeeFactory("semi");
+   FeeAbs fa =  ff.getFeeFactory("normal");
 
   double result = fa.calcFee();
   double expectd = 565.00;

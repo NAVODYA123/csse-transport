@@ -2,6 +2,9 @@ package com.csse.transport.service.FeeFactory;
 
 import com.csse.transport.controller.FeeController;
 import com.csse.transport.service.FeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 
 public class NormalBus extends FeeAbs{
 
@@ -10,7 +13,8 @@ public class NormalBus extends FeeAbs{
         calcFee();
         this.distance = distance;
     }
-    FeeService fc = new FeeService();
+    @Autowired
+    FeeService fc ;
     @Override
     public double calcFee(){
 
