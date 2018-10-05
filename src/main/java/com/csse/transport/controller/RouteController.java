@@ -24,31 +24,12 @@ public class RouteController {
     @PostMapping("/add-route")
     public ResponseEntity<Object> addNewRoute(@Valid @RequestBody Route r) {
 
-//        Route r = new Route();
-//        r.setRouteID(Integer.parseInt(body.get("routeId")));
-//        r.setOrigin(body.get("origin"));
-//        r.setOriginLatitude(Double.parseDouble(body.get("originLatitude")));
-//        r.setOriginLongitude(Double.parseDouble(body.get("originLongitude")));
-//        r.setDestination(body.get("destination"));
-//        r.setDesLatitude(Double.parseDouble(body.get("DesLatitude")));
-//        r.setDesLongitude(Double.parseDouble(body.get("DesLongitude")));
-
-//        r.setRouteID(body.getRouteID());
-//        r.setOrigin(body.getOrigin());
-//        r.setOriginLatitude(body.getOriginLatitude());
-//        r.setOriginLongitude(body.getOriginLongitude());
-//        r.setDestination(body.getDestination());
-//       r.setDesLatitude(body.getDesLatitude());
-//       r.setDesLongitude(body.getDesLongitude());
-
      Set<BusStop> busHalts = new HashSet<>();
        for( BusStop b:r.getBusStop()){
         busHalts.add(b);
            System.out.println(b.getTown());
         }
         r.setBusStop(busHalts);
-
-
 
         routeRepository.save(r);
 
@@ -64,6 +45,12 @@ public class RouteController {
     Iterable<Route> getAllRoutes() {
         //This returns a JSON or XML with the users
         return routeRepository.findAll();
+    }
+    @GetMapping(path = "/all-routes-only")
+    public @ResponseBody
+    Iterable<Integer> getAllRoutes_only() {
+        //This returns a JSON or XML with the users
+        return routeRepository.findrouteIds();
     }
 }
 

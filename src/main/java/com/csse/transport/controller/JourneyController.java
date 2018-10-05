@@ -81,12 +81,14 @@ public class JourneyController {
         PassengerJourney passengerJourney = passengerJourneyRepository.findByid(new PassengerJourneyId(jid,pid));
 
         PassengerJourney pj  = new PassengerJourney(journey,passenger);
-
-        if(passengerJourney.isStatus() == true || !passengerJourney.equals(null)){
+        if(passengerJourney!=null){
             pj.setStatus(false);
             pj.setDestLat(originBusStop.getBusHaltLatitude());
             pj.setDestLon(originBusStop.getBusHaltLongitude());
             pj.setDestination(originBusStop.getBusHaltName());
+            pj.setOriginLat(passengerJourney.getOriginLat());
+            pj.setOriginLon(passengerJourney.getOriginLon());
+            pj.setOrigin(passengerJourney.getOrigin());
 
         }else{
             pj.setStatus(true);
@@ -105,9 +107,15 @@ public class JourneyController {
     public @ResponseBody PassengerJourney getJourneyByj(){
         //This returns a JSON or XML with the users
 //        return passengerJourneyRepository.findByPassengerJourneyIdJourneyId(jid);
-        PassengerJourneyId pk =new PassengerJourneyId(1,"940");
-        PassengerJourney pi =passengerJourneyRepository.findByid(pk);
-        System.out.println(pi.getOrigin());
+        PassengerJourney pi= null;
+       try {
+           PassengerJourneyId pk =new PassengerJourneyId(1,"940");
+           pi =passengerJourneyRepository.findByid(pk);
+           System.out.println(pi.getOrigin());
+       }
+       catch (Exception ex){
+           System.out.println(ex.toString());
+       }
         return  pi;
     }
 
