@@ -1,5 +1,8 @@
 package com.csse.transport.service.FeeFactory;
 
+import org.springframework.stereotype.Controller;
+
+
 public class FeeFactory {
 
     private double distance;

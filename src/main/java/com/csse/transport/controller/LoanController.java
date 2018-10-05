@@ -45,7 +45,11 @@ public class LoanController {
 
         }
         else{
-            return "sorry you cant get loan service your balance is more than 10 or you already got loan";
+            if(loanamount==0){
+                return "sorry your account balance is more than 10 rupees ";
+            }
+            else{ return "sorry already got a lon please recharge and try!";}
+
         }
 
 
