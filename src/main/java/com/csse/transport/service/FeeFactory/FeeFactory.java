@@ -15,7 +15,7 @@ public class FeeFactory {
             return  new NormalBus(this.distance);
         }
         else if(busClass.equalsIgnoreCase("semi")){
-            return new SemiLuxuryBus(distance);
+            return new SemiLuxuryBus(this.distance);
         }
         else if(busClass.equalsIgnoreCase("luxury")){
             return new LuxuryBus(distance);

@@ -1,10 +1,6 @@
 package com.csse.transport.service.FeeFactory;
 
 import com.csse.transport.model.Fee;
-import com.csse.transport.repository.FeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-@Controller
 abstract public class FeeAbs {
 
     private double initialPrice;
@@ -13,6 +9,18 @@ abstract public class FeeAbs {
     private double classFactor;
     private int feeDataId;
     protected Fee feeData;
+
+
+
+    public double applyAlgorithm(){
+        double result;
+
+        result = initialPrice + (distance * priceFactor);
+
+        return result;
+    }
+
+    abstract public double calcFee();
 
     public int getFeeDataId() {
         return feeDataId;
@@ -30,23 +38,7 @@ abstract public class FeeAbs {
         this.feeData = feeData;
     }
 
-    @Autowired
-    protected FeeRepository feeRepository;
 
-    public FeeAbs(int id){
-        this.feeDataId = id;
-        this.feeData = feeRepository.findById(this.feeDataId);
-    }
-
-    public double applyAlgorithm(){
-        double result;
-
-        result = initialPrice + (distance * priceFactor);
-
-        return result;
-    }
-
-    abstract public double calcFee();
 
     public double getInitialPrice() {
         return initialPrice;

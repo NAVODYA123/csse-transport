@@ -1,11 +1,14 @@
 package com.csse.transport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 
 
 @Entity
-public class BusFare {
+@Table(name ="bus_stop_distance")
+public class BusStopDistance {
     @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
    private int id;
@@ -14,15 +17,13 @@ public class BusFare {
     private String busHalt2;
     private  double distance;
 
-    public String getRouteId() {
-        return routeId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "RouteID",nullable = false)
+    @JsonIgnore
+    private Route route;
 
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
-    }
 
-    private String routeId;
+
 
 
     public int getId() {
