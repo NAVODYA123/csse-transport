@@ -104,12 +104,12 @@ public class JourneyController {
 
     }
     @GetMapping(path="/get-journey")
-    public @ResponseBody PassengerJourney getJourneyByj(){
+    public @ResponseBody PassengerJourney getJourneyByj(@RequestParam int jid,String pid){
         //This returns a JSON or XML with the users
 //        return passengerJourneyRepository.findByPassengerJourneyIdJourneyId(jid);
         PassengerJourney pi= null;
        try {
-           PassengerJourneyId pk =new PassengerJourneyId(1,"940");
+           PassengerJourneyId pk =new PassengerJourneyId(jid,pid);
            pi =passengerJourneyRepository.findByid(pk);
            System.out.println(pi.getOrigin());
        }

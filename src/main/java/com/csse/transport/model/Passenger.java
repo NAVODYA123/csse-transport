@@ -29,6 +29,7 @@ public class Passenger implements Serializable{
     private String endDate;  //foreign
     private String password;
     private String accLevel;
+    private  int loanamount;
 
     @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -109,6 +110,13 @@ public class Passenger implements Serializable{
 
     public String getCountry() {
         return country;
+    }
+    public int getLoanamount() {
+        return loanamount;
+    }
+
+    public void setLoanamount(int loanamount) {
+        this.loanamount = loanamount;
     }
 
     public void setCountry(String country) {

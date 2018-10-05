@@ -30,10 +30,12 @@ public class AddBusController {
 
 
 
-        String BusID=body.get("BusID");
+        String BusID=body.get("busID");
+        System.out.println(BusID);
         String make=body.get("make");
         String type=body.get("type");
         int routeId= Integer.parseInt(body.get("route"));
+        String i=Integer.toString(routeId);
         String OwnerName=body.get("OwnerName");
 
 
@@ -46,8 +48,14 @@ public class AddBusController {
 
       p.setOwnerName(OwnerName);
 
-        AddBusReposirory.save(p);
-        return "Bus Registered successfully";
+
+
+
+
+
+          AddBusReposirory.save(p);
+          return "Bus Registered successfully";
+
     }
     @GetMapping(path="/getBus")
     public @ResponseBody

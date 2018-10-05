@@ -47,6 +47,7 @@ public class PassengerController {
         }
         String password = body.get("password");
 
+
         Passenger p = new Passenger();
         p.setPid(pid);
         p.setName(name);
@@ -62,6 +63,7 @@ public class PassengerController {
         p.setPassword(password);
         p.setStatus(true);
         p.setAccLevel("3");
+        p.setLoanamount(0);
 
         passengerRepository.save(p);
         return "Passenger Registered successfully";
