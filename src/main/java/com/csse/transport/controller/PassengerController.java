@@ -74,4 +74,10 @@ public class PassengerController {
         //This returns a JSON or XML with the users
         return passengerRepository.findByPid(pid);
     }
+
+    @GetMapping(path="/all-pas")
+    public @ResponseBody Iterable<Passenger> getAllUsers(){
+        //This returns a JSON or XML with the users
+        return passengerRepository.findAll();
+    }
 }

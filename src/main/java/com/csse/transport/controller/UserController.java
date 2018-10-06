@@ -1,11 +1,13 @@
 package com.csse.transport.controller;
 
+import com.csse.transport.model.Passenger;
 import com.csse.transport.model.User;
 import com.csse.transport.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,7 +16,7 @@ import java.net.URI;
 import java.util.Map;
 
 @Controller  // This means that this class is a Controller
-@RequestMapping(path="/sl-trans") // This means URL's start with /sl-trans (after Application path)
+@RequestMapping(path="/user") // This means URL's start with /sl-trans (after Application path)
 public class UserController {
 
     @Autowired   // This means to get the bean called userRepository
@@ -30,12 +32,12 @@ public class UserController {
         User n = new User();
         n.setUsername(username);
         n.setPassword(password);
-        userRepository.save(n);
+//        userRepository.save(n);
         return "User Registered successfully";
     }
 
     @GetMapping(path="/all-users")
-    public @ResponseBody Iterable<User> getAllUsers(){
+    public @ResponseBody Iterable<Passenger> getAllUsers(){
         //This returns a JSON or XML with the users
         return userRepository.findAll();
     }
@@ -75,7 +77,7 @@ public class UserController {
 //        String password = body.get("password");
 //        n.setPassword(password);
 //        n.setUsername(username);
-        userRepository.save(n);
+//        userRepository.save(n);
 //        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 //                .buildAndExpand(n.getId()).toUri();
 String message = "Successfull";
@@ -83,6 +85,27 @@ String message = "Successfull";
                 .ok()
                 .body(message);
 
+    }
+    @Transactional
+    @PutMapping("/change_password")
+    public ResponseEntity changePassword(@RequestBody Map<String, String> body){
+        System.out.println("inside put");
+        String message1 = "Password is not Chandged";
+        try{
+            String pid = body.get("pid");
+            String password = body.get("password");
+            int y = userRepository.changePassword(pid, password);
+            System.out.println(y);
+            if(y == 0){
+                message1 = "Password is not Chandged";
+            }
+            message1 = "Password Changed";
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+         return ResponseEntity
+                .ok()
+                .body(message1);
     }
 
 //    @PutMapping("/user-update/{id}")
